@@ -34,7 +34,7 @@ RUN set -eux; \
 
 RUN set -eux; \
 # gpg: key 3A79BD29: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
-	key='859BE8D7C586F538430B19C2467B942D3A79BD29'; \
+	key='BCA4 3417 C3B4 85DD 128E C6D4 B7B3 B788 A8D3 785C'; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key"; \
 	mkdir -p /etc/apt/keyrings; \
@@ -45,7 +45,7 @@ RUN set -eux; \
 ENV MYSQL_MAJOR 8.0
 ENV MYSQL_VERSION 8.0.35-1debian12
 
-RUN echo 'deb [ signed-by=/etc/apt/keyrings/mysql.gpg ] http://repo.mysql.com/apt/debian/ bookworm-slim mysql-8.0' > /etc/apt/sources.list.d/mysql.list
+RUN echo 'deb [ signed-by=/etc/apt/keyrings/mysql.gpg ] http://repo.mysql.com/apt/debian/ bookworm mysql-8.0' > /etc/apt/sources.list.d/mysql.list
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
 # also, we set debconf keys to make APT a little quieter
